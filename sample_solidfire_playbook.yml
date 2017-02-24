@@ -1,0 +1,207 @@
+---
+- name: SolidFire Sample Playbook
+  hosts: localhost
+  gather_facts: no
+  connection: local
+  vars:
+    solidfire_hostname: 192.168.143.114
+    solidfire_username: admin
+    solidfire_password: solidfire
+
+  tasks:
+#
+# Please remember to un-comment the tasks that you need.
+#
+#    - name: Check connections to MVIP and SVIP
+#      sf_check_connections:
+#        hostname: "{{ solidfire_hostname }}"
+#        username: "{{ solidfire_username }}"
+#        password: "{{ solidfire_password }}"
+#        # Other configurable parameters
+#        # skip: - Skip checking connection to either SVIP or MVIP
+#        #         Valid options - mvip, svip
+#        # mvip: - Optionally check connection of a different MVIP.
+#        #         This is not needed to test the connection to the target cluster.
+#        # svip: - Optionally check connection of a different SVIP.
+#        #         This is not needed to test the connection to the target cluster.
+#
+#
+# ----------- Account Manager ----------------
+#
+#
+#     - name: Create Account
+#       sf_account_manager:
+#        hostname: "{{ solidfire_hostname }}"
+#        username: "{{ solidfire_username }}"
+#        password: "{{ solidfire_password }}"
+#        state: present
+#        name: AnsibleUser
+#        #
+#        # Other configurable parameters:
+#        # ------------------------------
+#        # initiator_secret
+#        # target_secret
+#        # attributes
+#
+#    - name: Modify Account
+#      sf_account_manager:
+#        hostname: "{{ solidfire_hostname }}"
+#        username: "{{ solidfire_username }}"
+#        password: "{{ solidfire_password }}"
+#        state: present
+#        account_id: 7
+#        name: AnsibleUser-Renamed
+#        #
+#        # Other configurable parameters that can be updated:
+#        # --------------------------------------------------
+#        # name
+#        # status
+#        # initiator_secret
+#        # target_secret
+#        # attributes
+#
+#    - name: Delete Account
+#      sf_account_manager:
+#        hostname: "{{ solidfire_hostname }}"
+#        username: "{{ solidfire_username }}"
+#        password: "{{ solidfire_password }}"
+#        state: absent
+#        account_id: 7
+#
+#
+# ----------- Volume Manager ----------------
+#
+#
+#    - name: Create Volume
+#      sf_volume_manager:
+#        hostname: "{{ solidfire_hostname }}"
+#        username: "{{ solidfire_username }}"
+#        password: "{{ solidfire_password }}"
+#        state: present
+#        name: AnsibleVol
+#        account_id: 3
+#        enable512e: False
+#        size: 1
+#        size_unit: gb
+#
+#        # Other configurable parameters
+#        # qos: - Initial quality of service settings for this volume.
+#        # attributes: - List of Name/Value pairs in JSON object format.
+#
+#    - name: Update Volume
+#      sf_volume_manager:
+#        hostname: "{{ solidfire_hostname }}"
+#        username: "{{ solidfire_username }}"
+#        password: "{{ solidfire_password }}"
+#        state: present
+#        volume_id: 2
+#        access: readWrite
+#
+#        # Other configurable parameters
+#
+#        # account_id: - Account_id to which the volume is reassigned.
+#        #               If none is specified, the previous account name is used.
+#
+#        # set_create_time: - Identify the time at which the volume was created.
+#
+#        # qos: - Initial quality of service settings for this volume.
+#
+#        # attributes: - List of Name/Value pairs in JSON object format.
+#
+#    - name: Delete Volume
+#      sf_volume_manager:
+#        hostname: "{{ solidfire_hostname }}"
+#        username: "{{ solidfire_username }}"
+#        password: "{{ solidfire_password }}"
+#        state: absent
+#        volume_id: 2
+#
+#
+# ----------- Volume Access Group Manager ----------------
+#
+#    - name: Create Volume Access Group
+#      sf_volume_access_group_manager:
+#        hostname: "{{ solidfire_hostname }}"
+#        username: "{{ solidfire_username }}"
+#        password: "{{ solidfire_password }}"
+#        state: present
+#        name: AnsibleVolumeAccessGroup
+#        volumes: 7,8
+#
+#         Other configurable parameters:
+#         ------------------------------
+#         initiators
+#         virtual_network_id
+#         virtual_network_tags
+#         attributes
+#
+#    - name: Modify Volume Access Group
+#      sf_volume_access_group_manager:
+#        hostname: "{{ solidfire_hostname }}"
+#        username: "{{ solidfire_username }}"
+#        password: "{{ solidfire_password }}"
+#        state: present
+#        volume_access_group_id: 1
+#        name: AnsibleVolumeAccessGroup-Renamed
+#        #
+#        # Other configurable parameters that can be updated:
+#        # --------------------------------------------------
+#        # name
+#        # initiators
+#        # virtual_network_id
+#        # virtual_network_tags
+#        # volumes
+#        # attributes
+#
+#    - name: Delete Volume Access Group
+#      sf_volume_access_group_manager:
+#        hostname: "{{ solidfire_hostname }}"
+#        username: "{{ solidfire_username }}"
+#        password: "{{ solidfire_password }}"
+#        state: absent
+#        volume_access_group_id: 1
+#
+#
+# ----------- Snapshot Schedule Manager ----------------
+#
+#    - name: Create Snapshot schedule
+#      sf_snapshot_schedule_manager:
+#        hostname: "{{ solidfire_hostname }}"
+#        username: "{{ solidfire_username }}"
+#        password: "{{ solidfire_password }}"
+#        state: present
+#        name: AnsibleSnapshotSchedule
+#        time_interval_days: 1
+#        starting_date: 2016--12--01T00:00:00Z
+#        volumes: 7
+#
+#         Other configurable parameters:
+#         ------------------------------
+#         time_interval_hours
+#         time_interval_minutes
+#         pause
+#         recurring
+#         snapshot_name
+#         retention
+#
+#    - name: Update Snapshot schedule
+#      sf_snapshot_schedule_manager:
+#        hostname: "{{ solidfire_hostname }}"
+#        username: "{{ solidfire_username }}"
+#        password: "{{ solidfire_password }}"
+#        state: present
+#        schedule_id: 6
+#        recurring: True
+#        snapshot_name: AnsibleSnapshots
+#
+#    - name: Delete Snapshot schedule
+#      sf_snapshot_schedule_manager:
+#        hostname: "{{ solidfire_hostname }}"
+#        username: "{{ solidfire_username }}"
+#        password: "{{ solidfire_password }}"
+#        state: absent
+#        schedule_id: 6
+#
+#         Other configurable parameters:
+#         ------------------------------
+#         same as for the 'Create' example above.
